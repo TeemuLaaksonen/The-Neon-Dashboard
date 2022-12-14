@@ -1,0 +1,29 @@
+{
+  "name": "the-neon-dashboard",
+  "version": "1.0.0",
+  "description": "Back-end for The Neon Dashboard",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeemuLaaksonen/The-Neon-Dashboard.git"
+  },
+  "author": "Teemu Laaksonen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeemuLaaksonen/The-Neon-Dashboard/issues"
+  },
+  "homepage": "https://github.com/TeemuLaaksonen/The-Neon-Dashboard#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

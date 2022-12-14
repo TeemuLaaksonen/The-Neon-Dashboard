@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Neon Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="javascript/dashboard.js"></script>
+</head>
+<body onload="init()">
+    <div class="dataform">
+        <form id="newData">
+            <label for="user">Username:</label><br>
+            <input type="text" id="fusername" name="username" placeholder="Your username"><br>
+            <label for="url">URL:</label><br>
+            <input type="text" id="url" name="url" placeholder="URL of the article"><br>
+            <label for="content">Content:</label><br>
+            <input type="text" id="content" name="content" placeholder="Description"><br><br>
+            <input type="button" value="Submit" onclick="addData()">
+        </form> 
+    </div>
+    <div class="dataform">
+        <ul id="dataList"></ul>
+        <p id="dataText"></p>
+    </div>
+</body>
+</html>
