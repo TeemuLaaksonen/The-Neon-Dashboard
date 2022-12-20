@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // EXPRESS
 
 const express = require('express');
@@ -22,7 +24,8 @@ app.use((req, res, next) => {
 // MONGO
 
 const mongoose = require("mongoose");
-mongoose.connect('mongodb+srv://admin:QKZb2IZogYcwqoR3@neon.qfhb5vi.mongodb.net/?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+const database = process.env.DB_url;
+mongoose.connect(database, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
