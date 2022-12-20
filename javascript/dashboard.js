@@ -1,115 +1,82 @@
 function init() {
-    let dataText = document.getElementById("dataText");
-    dataText.innerHTML = "Loading data...";
-    loadData();
+  let contentText = document.getElementById("contentText");
+  contentText.innerHTML = "Loading content from database...";
+  loadContent();
 }
 
-async function loadData() {
-    let response = await fetch("http://localhost:3000/data");
-    let data = await response.json();
-    console.log(data);
-    showData(data);
+
+async function loadContent() {
+  let response = await fetch("http://localhost:3000/test");
+  let data = await response.json();
+  console.log(data);
+  showContent(data);
 }
 
-function createDataListItem(data) {
-    // luodaan uusi LI-elementti
-    let li = document.createElement('li')
-
-      // luodaan uusi id-attribuutti
-    let li_attr = document.createAttribute('id')
-
-      // kiinnitetään tehtävän/todon id:n arvo luotuun attribuuttiin 
-    li_attr.value= data._id
-
-      // kiinnitetään attribuutti LI-elementtiin
-    li.setAttributeNode(li_attr)
-
-      // luodaan uusi tekstisolmu, joka sisältää tehtävän/todon tekstin
-    let text = document.createTextNode(data.text)
-
-      // lisätään teksti LI-elementtiin
-    li.appendChild(text)
-
-      // luodaan uusi SPAN-elementti, käytännössä x-kirjan, jotta tehtävä saadaan poistettua
-    let span = document.createElement('span')
-
-      // luodaan uusi class-attribuutti
-    let span_attr = document.createAttribute('class')
-
-      // kiinnitetään attribuuttiin delete-arvo, ts. class="delete", jotta saadaan tyylit tähän kiinni
-    span_attr.value = 'delete'
-
-      // kiinnitetään SPAN-elementtiin yo. attribuutti
-    span.setAttributeNode(span_attr)
-
-      // luodaan tekstisolmu arvolla x
-    let x = document.createTextNode(' x ')
-
-      // kiinnitetään x-tekstisolmu SPAN-elementtiin (näkyville)
-    span.appendChild(x)
-
-      // määritetään SPAN-elementin onclick-tapahtuma kutsumaan removeTodo-funkiota
-    span.onclick = function() { removeData(data._id) }
-
-      // lisätään SPAN-elementti LI-elementtin
-    li.appendChild(span)
-
-      // palautetaan luotu LI-elementti
-      // on siis muotoa: <li id="mongoIDXXXXX">Muista soittaa...<span class="remove">x</span></li>
-    return li
+function submit() {
+  let link = document.getElementById("input1");
+  let content = document.getElementById("input3");
+  let user = document.getElementById("input2");
+  let data = {
+      link: link.value,
+      content: content.value,
+      user: user.value
+  };
+  console.log(data);
+  saveContent(data);
 }
 
-function showData(data) {
-    let todosList = document.getElementById("dataList");
-    let infoText = document.getElementById("dataText");
-
-    // In case empty
-    if (data.length === 0) {
-        infoText.innerHTML = "No data to show...";
-    }
-    else {
-        data.forEach(data => {
-            let li = createDataListItem(data);
-            dataList.appendChild(li)
-        });
-        infoText.innerHTML = "";
-    }
+async function saveContent(data) {
+  let response = await fetch("http://localhost:3000/test", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+  });
+  let result = await response.json();
+  console.log(result);
 }
 
-async function addData() {
-    let newData1 = document.getElementById("newData").elements[0].value;
-    let newData2 = document.getElementById("newData").elements[1].value;
-    let newData3 = document.getElementById("newData").elements[2].value;
-    const data = { "user": newData1, "url": newData2, "content": newData3};
-    const response = await fetch("http://localhost:3000/data", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
 
-    let storedData = await response.json();
-    let dataList = document.getElementById("dataList");
-    let li = createDataListItem(storedData);
-    dataList.appendChild(li);
-
-    let infoText = document.getElementById("dataText");
-    infoText.innerHTML = "";
-    newData.value = "";
+// WORK IN PROGRESS - DOES NOT COMPLETELY WORK YET
+function createContentItem(data) {
+  let linebreak = document.createElement("br");
+  let li = document.createElement("li");
+  let a = document.createElement("a");
+  let p = document.createElement("p");
+  let linkText = document.createTextNode("Link to content");
+  let submitter = document.createTextNode("Submitted by: ");
+  let li_attr = document.createAttribute("id");
+  li_attr.value = data._id;
+  li.setAttributeNode(li_attr);
+  let content = document.createTextNode(data.content);
+  let user = document.createTextNode(data.user);
+  p.appendChild(a)
+  a.appendChild(linkText);
+  a.title = data.content;
+  a.href = data.link;
+  li.appendChild(content);
+  li.appendChild(linebreak);
+  li.appendChild(linebreak);
+  li.appendChild(a);
+  li.appendChild(linebreak);
+  li.appendChild(submitter);
+  li.appendChild(user);
+  return li;
 }
 
-async function removeData(id) {
-    const response = await fetch('http://localhost:3000/data/'+id, {
-        method: 'DELETE'
-    })
-    let responseJson = await response.json()
-    let li = document.getElementById(id)
-    li.parentNode.removeChild(li)
+function showContent(data) {
+  let contentList = document.getElementById("contentList");
+  let contentText = document.getElementById("contentText");
 
-    let dataList = document.getElementById('dataList')
-    if (!dataList.hasChildNodes()) {
-        let infoText = document.getElementById('dataText')
-        infoText.innerHTML = 'No data to show'
-    }
+  if (data.length == 0) {
+      contentText.innerHTML = "The content list is empty";
+      }
+  else {
+      data.forEach(data => {
+          let li = createContentItem(data);
+          contentList.appendChild(li);
+      });
+      contentText.innerHTML = "";
+  }
 }

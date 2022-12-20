@@ -4,25 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Neon Dashboard</title>
+    <title>Database testing</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="javascript/dashboard.js"></script>
 </head>
 <body onload="init()">
-    <div class="dataform">
-        <form id="newData">
-            <label for="user">Username:</label><br>
-            <input type="text" id="fusername" name="username" placeholder="Your username"><br>
-            <label for="url">URL:</label><br>
-            <input type="text" id="url" name="url" placeholder="URL of the article"><br>
-            <label for="content">Content:</label><br>
-            <input type="text" id="content" name="content" placeholder="Description"><br><br>
-            <input type="button" value="Submit" onclick="addData()">
-        </form> 
-    </div>
-    <div class="dataform">
-        <ul id="dataList"></ul>
-        <p id="dataText"></p>
+    <form id="contentData" method="post" action="javascript:submit()">
+        <input type="text" id="input1" name="url" placeholder="Link to the website"><br><br>
+        <input type="text" id="input2" name="username" placeholder="Your username"><br><br>
+        <input type="text" id="input3" name="content" placeholder="A brief description of the content, for example a headline of the article"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <br><br>
+    <div id="contentText"></div>
+    <br><br>
+    <div>
+        <ul id="contentList"></ul>
     </div>
 </body>
 </html>
