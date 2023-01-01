@@ -2,3 +2,33 @@
     max-width: 400px;
     margin: auto;
 }
+
+/* Background image */
+body {
+    background-image: url("Images/Background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ccc;
+}
+
+.textfield {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.textfield-large {
+    width: 100%;
+    height: 120px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}

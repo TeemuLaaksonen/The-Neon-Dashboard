@@ -23,6 +23,9 @@ function submit() {
   };
   console.log(data);
   saveContent(data);
+  const inputs = document.querySelectorAll('#input1, #input2, #input3');
+  inputs.forEach(input => input.value = '');
+  contentText.innerHTML = "Information was saved to database!"; 
 }
 
 async function saveContent(data) {

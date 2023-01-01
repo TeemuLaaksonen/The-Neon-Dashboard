@@ -10,11 +10,13 @@
 </head>
 <body onload="init()">
     <form id="contentData" method="post" action="javascript:submit()">
-        <input type="text" id="input1" name="url" placeholder="Link to the website"><br><br>
-        <input type="text" id="input2" name="username" placeholder="Your username"><br><br>
-        <input type="text" id="input3" name="content" placeholder="A brief description of the content, for example a headline of the article"><br><br>
+        <input class="textfield" type="text" id="input1" name="url" placeholder="Link to the website"><br><br>
+        <input class="textfield" type="text" id="input2" name="username" placeholder="Your username"><br><br>
+        <input class="textfield"  id="input3" name="content" placeholder="A brief description of the content, for example a headline of the article"><br><br>
         <button type="submit">Submit</button>
     </form>
+    <br><br>
+    <button type="submit" onClick="window.location.reload()">Refresh</button>
     <br><br>
     <div id="contentText"></div>
     <br><br>
