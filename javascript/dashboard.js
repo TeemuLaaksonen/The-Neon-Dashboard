@@ -47,24 +47,30 @@ function createContentItem(data) {
   let li = document.createElement("li");
   let a = document.createElement("a");
   let p = document.createElement("p");
+
   let linkText = document.createTextNode("Link to content");
   let submitter = document.createTextNode("Submitted by: ");
+
   let li_attr = document.createAttribute("id");
   li_attr.value = data._id;
   li.setAttributeNode(li_attr);
+
   let content = document.createTextNode(data.content);
   let user = document.createTextNode(data.user);
-  p.appendChild(a)
+
+  
   a.appendChild(linkText);
-  a.title = data.content;
+  a.title = data.link;
   a.href = data.link;
-  li.appendChild(content);
-  li.appendChild(linebreak);
-  li.appendChild(linebreak);
   li.appendChild(a);
-  li.appendChild(linebreak);
+
+  p.appendChild(content);
+  li.appendChild(p);
+
+  
   li.appendChild(submitter);
   li.appendChild(user);
+  
   return li;
 }
 
